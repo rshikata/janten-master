@@ -1,6 +1,3 @@
-from backend.janten_master.src.controller.no_data_exception import NoDataException
-
-
 try:
     import os
     import sys

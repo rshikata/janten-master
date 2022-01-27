@@ -1,6 +1,3 @@
-from backend.janten_master.src.controller.pai import Pai
-
-
 class ResourceCntroller:
     """牌IDとパスとの間の変換を行う"""
 
