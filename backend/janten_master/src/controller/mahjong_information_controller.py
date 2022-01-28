@@ -27,7 +27,7 @@ class MahjongInformationController:
         """プレーヤーの回答情報をデータベースに登録する
 
         Args:
-            question_id (str): 問題のID
+            question_id (int): 問題のID
             player_name (str): プレーヤーの名前
             answer_pai (str): 回答牌のID
 
@@ -56,10 +56,10 @@ class MahjongInformationController:
             )
             accessor.insert_answer_information(DATABASE_NAME, answer)
 
-            return ({"data": {}, "error": {}}, 200)
+            return {"data": {}, "error": {}}, 200
 
         except Exception:
-            return (self.__create_error_dict("回答情報の登録に失敗しました。"), 404)
+            return self.__create_error_dict("回答情報の登録に失敗しました。"), 404
 
     def get_aggregate_results(self, question_id):
         """データベースから集計情報を取得する
@@ -68,15 +68,15 @@ class MahjongInformationController:
             question_id (int): 問題のID
 
         Returns:
-            json: 集計情報を取得した結果を格納したjson
+            json: 集計情報を格納したjson
                 正常時:
                 {
                     "data": {
                         "answer_imformation":[
-                                {"id":int, "path";str},
-                                ...
+                            {"id":str, "path":str, "number":int},
+                            ...
                         ]},
-                    "error": {"message": str},
+                    "error": {},
                 }
                 例外発生時:
                 {
@@ -98,42 +98,43 @@ class MahjongInformationController:
             )
 
             results_list = []
-            for i in range(len(aggregate_results)):
+            for data in aggregate_results:
                 results_list.append(
                     [
-                        aggregate_results[i].answer_pai_id,
-                        aggregate_results[i].answer_count,
+                        data.answer_pai_id,
+                        data.answer_count,
                     ]
                 )
 
-            aggregate_results_list = self.__create_pai_dict(results_list, 1)
+            aggregate_results_list = self.__create_aggregated_data_dict(results_list)
 
             result_dict = {
                 "data": {"answer_imformation": aggregate_results_list},
                 "error": {},
             }
 
-            return (result_dict, 200)
+            return result_dict, 200
 
         except Exception:
-            return (self.__create_error_dict("集計結果の取得に失敗しました。"), 404)
+            return self.__create_error_dict("集計結果の取得に失敗しました。"), 404
 
-    def get_qestion_information(self):
+    def get_question_information(self):
         """データベースから問題情報を取得する
 
         Returns:
-            json: 問題情報を取得した結果を格納したjson
+            json: 問題情報を格納したjson
 
             正常時:
             {
                 "data": {
                     "question-id ": int,
-                    "dora-pai": {"id":int, "path";str},
-                    "tsumo-pai": {"id":int, "path";str},
+                    "dora-pai": {"id":str, "path":str},
+                    "tsumo-pai": {"id":str, "path":str},
                     "tehai": [
-                        {"id":int, "path";str},
+                        {"id":str, "path":str},
                         ...
-                    ]}
+                    ]},
+                "error": {}
             }
             例外発生時:
             {
@@ -175,13 +176,13 @@ class MahjongInformationController:
                 tehai.tehai_13,
             ]
 
-            dora_dict = self.__create_pai_dict([question.dora_id], 0)
-            tsumo_dict = self.__create_pai_dict([question.tsumo_id], 0)
-            tehai_dict = self.__create_pai_dict(tehai_list, 0)
+            dora_dict = self.__create_pai_data_dict([question.dora_id])
+            tsumo_dict = self.__create_pai_data_dict([question.tsumo_id])
+            tehai_dict = self.__create_pai_data_dict(tehai_list)
 
             result_dict = {
                 "data": {
-                    "question-id ": question.question_id,
+                    "question-id": question.question_id,
                     "dora-pai": dora_dict[0],
                     "tsumo-pai": tsumo_dict[0],
                     "tehai": tehai_dict,
@@ -189,35 +190,40 @@ class MahjongInformationController:
                 "error": {},
             }
 
-            return (result_dict, 200)
-        except Exception as e:
-            print(e)
-            return (self.__create_error_dict("問題の取得に失敗しました。"), 404)
+            return result_dict, 200
 
-    # 牌情報のdictを作成する。(0:牌ID・パス,1:牌ID・パス・回答数)
-    def __create_pai_dict(self, pai_list, mode):
+        except Exception:
+            return self.__create_error_dict("問題の取得に失敗しました。"), 404
+
+    # 牌情報のdictを作成する。
+    def __create_pai_data_dict(self, pai_list):
         operator = ResourceCntroller("../pai-images")
         pai_data_list = []
-        if mode == 0:
-            for pai in pai_list:
-                pai_data_list.append(
-                    {"id": pai.value.get("id"), "path": operator.convert_to_path(pai)}
-                )
-        elif mode == 1:
-            for i in range(len(pai_list)):
-                pai_data_list.append(
-                    {
-                        "id": pai_list[i][0].value.get("id"),
-                        "path": operator.convert_to_path(pai_list[i][0]),
-                        "number": pai_list[i][1],
-                    }
-                )
-        else:
-            raise ValueError
+
+        for pai in pai_list:
+            pai_data_list.append(
+                {"id": pai.value.get("id"), "path": operator.convert_to_path(pai)}
+            )
 
         return pai_data_list
 
-    # 例外発生時のJson作成
+    # 集計情報のdictを作成する。
+    def __create_aggregated_data_dict(self, pai_list):
+        operator = ResourceCntroller("../pai-images")
+        pai_data_list = []
+
+        for pai in pai_list:
+            pai_data_list.append(
+                {
+                    "id": pai[0].value.get("id"),
+                    "path": operator.convert_to_path(pai[0]),
+                    "number": pai[1],
+                }
+            )
+
+        return pai_data_list
+
+    # 例外発生時のdictを作成
     def __create_error_dict(self, message):
 
         return {"data": {}, "error": {"message": message}}

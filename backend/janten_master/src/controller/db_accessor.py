@@ -20,8 +20,8 @@ else:
     from backend.janten_master.src.controller.pai import (
         Pai,
     )
-    from backend.janten_master.src.controller.no_data_exception import (
-        NoDataException,
+    from backend.janten_master.src.controller.not_found_exception import (
+        NotFoundException,
     )
 
 
@@ -76,9 +76,8 @@ class DBAccessor:
             aggregate_results = cursor.fetchall()
 
             if len(aggregate_results) == 0:
-                raise NoDataException
+                raise NotFoundException
 
-            print(aggregate_results)
             aggregate_results_list = []
             for i in range(len(aggregate_results)):
                 aggregate_results_list.append(
@@ -114,7 +113,7 @@ class DBAccessor:
             question_data = cursor.fetchall()
 
             if len(question_data) == 0:
-                raise NoDataException
+                raise NotFoundException
 
             question_entity = QuestionInformation(
                 question_data[0][0],
@@ -150,7 +149,7 @@ class DBAccessor:
             tehai_data = cursor.fetchall()
 
             if len(tehai_data) == 0:
-                raise NoDataException
+                raise NotFoundException
 
             tehai_entity = TehaiInformation(
                 tehai_data[0][0],

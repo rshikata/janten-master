@@ -5,10 +5,10 @@ class ResourceCntroller:
         self.__root_path = root_path
 
     def convert_to_path(self, pai_id):
-        """牌IDからパスに変換
+        """牌情報からパスに変換
 
         Args:
-            pai_id (int): 牌のID
+            pai_id (Pai): 牌情報
 
         Returns:
             str: 牌IDに対応した画像ファイルパス

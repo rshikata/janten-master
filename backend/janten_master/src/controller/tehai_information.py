@@ -3,19 +3,19 @@ class TehaiInformation:
 
     Attributes:
         tehai_id (int): 手牌のID
-        tehai_01 (int): 牌ID
-        tehai_02 (int): 牌ID
-        tehai_03 (int): 牌ID
-        tehai_04 (int): 牌ID
-        tehai_05 (int): 牌ID
-        tehai_06 (int): 牌ID
-        tehai_07 (int): 牌ID
-        tehai_08 (int): 牌ID
-        tehai_09 (int): 牌ID
-        tehai_10 (int): 牌ID
-        tehai_11 (int): 牌ID
-        tehai_12 (int): 牌ID
-        tehai_13 (int): 牌ID
+        tehai_01 (Pai): 牌情報
+        tehai_02 (Pai): 牌情報
+        tehai_03 (Pai): 牌情報
+        tehai_04 (Pai): 牌情報
+        tehai_05 (Pai): 牌情報
+        tehai_06 (Pai): 牌情報
+        tehai_07 (Pai): 牌情報
+        tehai_08 (Pai): 牌情報
+        tehai_09 (Pai): 牌情報
+        tehai_10 (Pai): 牌情報
+        tehai_11 (Pai): 牌情報
+        tehai_12 (Pai): 牌情報
+        tehai_13 (Pai): 牌情報
         create_datetime (str): 作成日時
         update_datetime (str): 更新日時
 

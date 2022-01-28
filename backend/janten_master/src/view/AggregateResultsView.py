@@ -26,7 +26,7 @@ class AggregateResultsView(APIView):
         """
 
         operator = MahjongInformationController()
-        (response_json, status) = operator.get_aggregate_results(
+        response_json, status = operator.get_aggregate_results(
             request.query_params.get("id")
         )
 

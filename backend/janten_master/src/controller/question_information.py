@@ -3,8 +3,8 @@ class QuestionInformation:
 
     Attributes:
         question_id (int): 問題のID
-        dora_id (int): ドラ牌の牌ID
-        tsumo_id (int): ツモ牌の牌ID
+        dora_id (Pai): ドラ牌の牌情報
+        tsumo_id (Pai): ツモ牌の牌情報
         tehai_id (int): 手牌のID
         create_datetime (str): 作成日時
         update_datetime (str): 更新日時

@@ -2,9 +2,9 @@ class AnswerInformation:
     """プレーヤーの回答情報を保持する
 
     Attributes:
-        question_id (int): 回答牌のID
+        question_id (int): 問題のID
         player_name (str): プレーヤーの名前
-        answer_pai_id (int): プレーヤーが回答した牌ID
+        answer_pai_id (Pai): プレーヤーが回答した牌の牌情報
 
     """
 

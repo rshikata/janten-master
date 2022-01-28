@@ -65,6 +65,7 @@ class Pai(Enum):
         for pai in Pai:
             if pai.value.get("id") == pai_id:
                 pai_value = pai
+                break
 
         if pai_value == None:
             raise ValueError
