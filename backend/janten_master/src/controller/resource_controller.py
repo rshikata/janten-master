@@ -1,4 +1,4 @@
-class ResourceCntroller:
+class ResourceController:
     """牌IDとパスとの間の変換を行う"""
 
     def __init__(self, root_path):

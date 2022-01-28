@@ -10,7 +10,7 @@ except ImportError as e:
 else:
     from backend.janten_master.src.controller.db_accessor import DBAccessor
     from backend.janten_master.src.controller.resource_controller import (
-        ResourceCntroller,
+        ResourceController,
     )
     from backend.janten_master.src.controller.answer_information import (
         AnswerInformation,
@@ -197,7 +197,7 @@ class MahjongInformationController:
 
     # 牌情報のdictを作成する。
     def __create_pai_data_dict(self, pai_list):
-        operator = ResourceCntroller("../pai-images")
+        operator = ResourceController("../pai-images")
         pai_data_list = []
 
         for pai in pai_list:
@@ -209,7 +209,7 @@ class MahjongInformationController:
 
     # 集計情報のdictを作成する。
     def __create_aggregated_data_dict(self, pai_list):
-        operator = ResourceCntroller("../pai-images")
+        operator = ResourceController("../pai-images")
         pai_data_list = []
 
         for pai in pai_list:
