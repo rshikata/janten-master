@@ -124,8 +124,8 @@ export default {
 			this.paiId = null;
 		},
 
-		setSelectPai(select) {
-			this.paiId = select;
+		setSelectPai(selectPai) {
+			this.paiId = selectPai;
 		},
 		setPlayerName(name) {
 			this.playerName = name;
