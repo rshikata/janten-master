@@ -67,7 +67,7 @@ export default {
 		try {
 			await this.getQuestion();
 		} catch (error) {
-			this.errorMessage = error;
+			this.errorMessage = error.message;
 		}
 	},
 	methods: {
@@ -78,7 +78,7 @@ export default {
 				await this.getAggregateResults();
 				this.errorMessage = "";
 			} catch (error) {
-				this.errorMessage = error;
+				this.errorMessage = error.message;
 			}
 		},
 
@@ -88,7 +88,7 @@ export default {
 				this.setViewMode();
 				this.clear();
 			} catch (error) {
-				this.errorMessage = error;
+				this.errorMessage = error.message;
 			}
 		},
 

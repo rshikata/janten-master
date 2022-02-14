@@ -94,7 +94,7 @@ export default class JantenMasterController {
 		const resultList = [];
 		answerData.forEach((answer) => {
 			const pai = new Pai(answer["id"], answer["path"]);
-			const ratio = Math.round((answer["number"] / totalAnswer) * 1000) / 10;
+			const ratio = Math.round((answer["number"] / totalAnswer) * 100);
 			resultList.push(new ResultInformation(pai, ratio, answer["number"]));
 		});
 
