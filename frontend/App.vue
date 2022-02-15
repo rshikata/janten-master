@@ -16,18 +16,20 @@
 				:disabledMode="viewMode"
 				@setInputText="setPlayerName"
 			/>
-			<my-button :disabled="viewMode" @onClick="onClickAnswer">回答</my-button>
+			<switch-button :disabled="viewMode" @onClick="onClickAnswer"
+				>回答</switch-button
+			>
 		</div>
 		<h3 class="error-message">{{ errorMessage }}</h3>
 		<div v-show="viewMode" class="results-area">
 			<result-area :resultList="aggregateResults" />
-			<my-button
+			<switch-button
 				class="answer-button"
 				:height="70"
 				:width="120"
 				:viewMode="viewMode"
 				@onClick="onClickNextQuestion"
-				>次の問題</my-button
+				>次の問題</switch-button
 			>
 		</div>
 	</div>
@@ -38,7 +40,7 @@ import DoraImage from "./components/DoraImage.vue";
 import ResultArea from "./components/ResultArea.vue";
 import TehaiImage from "./components/TehaiImage.vue";
 import TextBox from "./components/TextBox.vue";
-import MyButton from "./components/MyButton.vue";
+import SwitchButton from "./components/SwitchButton.vue";
 
 import QuestionViewController from "./question-view-controller";
 
@@ -49,7 +51,7 @@ export default {
 		TehaiImage,
 		TextBox,
 		ResultArea,
-		MyButton,
+		SwitchButton,
 	},
 	data() {
 		return {

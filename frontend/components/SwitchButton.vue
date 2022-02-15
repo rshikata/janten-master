@@ -1,6 +1,6 @@
 <template>
 	<button
-		class="my-button"
+		class="switch-button"
 		:disabled="disabled"
 		:style="buttonStyle"
 		@click="onClickAnswer"
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-	name: "my-button",
+	name: "switch-button",
 	props: {
 		disabled: {
 			type: Boolean,
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style>
-.my-button {
+.switch-button {
 	color: #000000;
 	background: #66c5d6;
 	font-size: 100%;
@@ -51,7 +51,7 @@ export default {
 	border-color: #000000;
 }
 
-.my-button:disabled {
+.switch-button:disabled {
 	background: #525050;
 }
 </style>

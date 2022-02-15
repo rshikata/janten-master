@@ -8,7 +8,7 @@ import AnswerInformation from "./answer-information";
 export default class QuestionViewController {
 	/**
 	 * urlを初期化する
-	 * @param {string} url
+	 * @param {string} 表示する画像のURL
 	 */
 	constructor(url) {
 		this._url = url;

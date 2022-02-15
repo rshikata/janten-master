@@ -9,6 +9,10 @@ import ResultInformation from "./result-information";
 import AnswerInformation from "./answer-information";
 
 export default class JantenMasterController {
+	constructor() {
+		this._API_URL = "http://localhost:8000/webapi/v1/";
+	}
+
 	/**
 	 * 問題情報を取得する
 	 *
@@ -17,10 +21,10 @@ export default class JantenMasterController {
 	 */
 	async getQestionInformation() {
 		const operator = this._createHttpOperator();
-		const url = "http://localhost:8000/webapi/v1/question-information/";
+		const url = `${this._API_URL}question-information/`;
 		const questionData = await operator.requestData(url, HTTPMthod.GET);
 
-		if (Object.keys(questionData["error"]).length == 0) {
+		if (Object.keys(questionData["error"]).length === 0) {
 			return this._perseQestionInformation(questionData);
 		} else {
 			throw new Error(questionData["error"]["message"]);
@@ -45,14 +49,14 @@ export default class JantenMasterController {
 		};
 
 		const operator = this._createHttpOperator();
-		const url = "http://localhost:8000/webapi/v1/answer-information/";
+		const url = `${this._API_URL}answer-information/`;
 		const registerResult = await operator.requestData(
 			url,
 			HTTPMthod.POST,
 			answerData
 		);
 
-		if (Object.keys(registerResult["error"]).length != 0) {
+		if (Object.keys(registerResult["error"]).length !== 0) {
 			throw new Error(registerResult["error"]["message"]);
 		}
 	}
@@ -70,9 +74,9 @@ export default class JantenMasterController {
 			throw new SyntaxError("引数が不正です。");
 		}
 		const operator = this._createHttpOperator();
-		const url = `http://localhost:8000/webapi/v1/aggregate-results/?id=${questionId}`;
+		const url = `${this._API_URL}aggregate-results/?id=${questionId}`;
 		const AggregateResults = await operator.requestData(url, HTTPMthod.GET);
-		if (Object.keys(AggregateResults["error"]).length == 0) {
+		if (Object.keys(AggregateResults["error"]).length === 0) {
 			const result = this._perseAggregateResults(AggregateResults);
 
 			result.sort((a, b) => b.answerCount - a.answerCount);

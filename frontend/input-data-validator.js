@@ -12,11 +12,11 @@ export default class InputDataValidator {
 	 */
 	validateAnswerInformation(playerName, answerPaiId) {
 		let validateFlag = false;
-		if (answerPaiId != null && playerName != null) {
+		if (answerPaiId && playerName) {
 			const pattern =
 				/[!"#$%&'()*+\-.,/:;<=>?@[\\\]^_`{|}~！”＃＄％＆’（）＝～｜‘｛＋＊｝＜＞？＿－＾￥＠「；：」、。・ /\s]/g;
 			playerName = playerName.replace(pattern, "");
-			if (playerName.length != 0) {
+			if (playerName.length !== 0) {
 				validateFlag = true;
 			}
 		}
