@@ -9,6 +9,10 @@ import ResultInformation from "./result-information";
 import AnswerInformation from "./answer-information";
 
 export default class JantenMasterController {
+	/**
+	 * APIのリクエストURLを設定する
+	 *
+	 */
 	constructor() {
 		this._API_URL = "http://localhost:8000/webapi/v1/";
 	}
