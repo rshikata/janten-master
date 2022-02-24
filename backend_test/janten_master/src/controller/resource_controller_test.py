@@ -16,7 +16,7 @@ else:
 
 
 class TestResourceController(unittest.TestCase):
-    """register_answer_information()のテスト"""
+    """convert_to_path()のテスト"""
 
     def test_convert_to_path(self):
         """convert_to_path()をテストするメソッド
@@ -27,10 +27,10 @@ class TestResourceController(unittest.TestCase):
         """
         controller = self._create_resource_controller()
         result = controller.convert_to_path(Pai.MAN_01)
-        self.assertEqual(result, "test/man1-66-90-l.png")
+        self.assertEqual(result, "dummy/man1-66-90-l.png")
 
     def _create_resource_controller(self):
-        return ResourceController("test")
+        return ResourceController("dummy")
 
 
 if __name__ == "__main__":

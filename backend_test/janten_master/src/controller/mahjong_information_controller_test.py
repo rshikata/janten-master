@@ -53,13 +53,13 @@ class TestMahjongInformationController(unittest.TestCase):
         """register_answer_information()をテストするメソッド
 
         テスト項目:
-            引数は正しいが例外(SqliteException)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            引数は正しいが例外(SqliteException)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
         controller.test_operator.insert_answer_information.side_effect = SqliteException
 
-        result = controller.register_answer_information(1, "test", "MAN_01")
+        result = controller.register_answer_information(1, "dummy", "MAN_01")
         self.assertEqual(
             result[0], {"data": {}, "error": {"message": "回答情報の登録に失敗しました。"}}
         )
@@ -69,13 +69,13 @@ class TestMahjongInformationController(unittest.TestCase):
         """register_answer_information()をテストするメソッド
 
         テスト項目:
-            引数は正しいが例外(Exception)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            引数は正しいが例外(Exception)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
         controller.test_operator.insert_answer_information.side_effect = Exception
 
-        result = controller.register_answer_information(1, "test", "TEST_01")
+        result = controller.register_answer_information(1, "dummy", "TEST_01")
         self.assertEqual(result[0], {"data": {}, "error": {"message": "例外が発生しました。"}})
         self.assertEqual(result[1], 404)
 
@@ -104,7 +104,7 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_aggregate_results()をテストするメソッド
 
         テスト項目:
-            引数は正しいが例外(SqliteException)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            引数は正しいが例外(SqliteException)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
@@ -123,7 +123,7 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_aggregate_results()をテストするメソッド
 
         テスト項目:
-            引数は正しいが例外(NotFoundException)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            引数は正しいが例外(NotFoundException)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
@@ -140,7 +140,7 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_aggregate_results()をテストするメソッド
 
         テスト項目:
-            引数は正しいが例外(Exception)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            引数は正しいが例外(Exception)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
@@ -188,11 +188,11 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_question_information()をテストするメソッド
 
         テスト項目:
-            レコード数取得時に例外(SqliteException)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            レコード数取得時に例外(SqliteException)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
-        controller.test_operator.convert_to_path.return_value = "test"
+        controller.test_operator.convert_to_path.return_value = "dummy"
         controller.test_operator.get_number_of_records.side_effect = SqliteException
 
         controller.test_operator.select_question_information.return_value = (
@@ -212,11 +212,11 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_question_information()をテストするメソッド
 
         テスト項目:
-            問題情報取得時に例外(SqliteException)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            問題情報取得時に例外(SqliteException)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
-        controller.test_operator.convert_to_path.return_value = "test"
+        controller.test_operator.convert_to_path.return_value = "dummy"
         controller.test_operator.get_number_of_records.return_value = 1
 
         controller.test_operator.select_question_information.side_effect = (
@@ -236,11 +236,11 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_question_information()をテストするメソッド
 
         テスト項目:
-            問題情報取得時に例外(NotFoundException)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            問題情報取得時に例外(NotFoundException)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
-        controller.test_operator.convert_to_path.return_value = "test"
+        controller.test_operator.convert_to_path.return_value = "dummy"
         controller.test_operator.get_number_of_records.return_value = 1
 
         controller.test_operator.select_question_information.side_effect = (
@@ -260,11 +260,11 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_question_information()をテストするメソッド
 
         テスト項目:
-            手牌情報取得時に例外(SqliteException)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            手牌情報取得時に例外(SqliteException)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
-        controller.test_operator.convert_to_path.return_value = "test"
+        controller.test_operator.convert_to_path.return_value = "dummy"
         controller.test_operator.get_number_of_records.return_value = 1
 
         controller.test_operator.select_question_information.return_value = (
@@ -282,11 +282,11 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_question_information()をテストするメソッド
 
         テスト項目:
-            手牌情報取得時に例外(NotFoundException)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            手牌情報取得時に例外(NotFoundException)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
-        controller.test_operator.convert_to_path.return_value = "test"
+        controller.test_operator.convert_to_path.return_value = "dummy"
         controller.test_operator.get_number_of_records.return_value = 1
 
         controller.test_operator.select_question_information.return_value = (
@@ -306,11 +306,11 @@ class TestMahjongInformationController(unittest.TestCase):
         """get_question_information()をテストするメソッド
 
         テスト項目:
-            例外(Exception)が発生した場合、エラーメッセーを含む連想配列とステータスコードが返される。
+            例外(Exception)が発生した場合、エラーメッセージを含む連想配列とステータスコードが返される。
         """
 
         controller = self.__create_mahjong_controller()
-        controller.test_operator.convert_to_path.return_value = "test"
+        controller.test_operator.convert_to_path.return_value = "dummy"
         controller.test_operator.get_number_of_records.return_value = 0
 
         controller.test_operator.select_question_information.return_value = (

@@ -57,7 +57,7 @@ class TestDBAccessor(unittest.TestCase):
 
         accessor = self._create_db_accessor()
         with self.assertRaises(SqliteException):
-            accessor.get_number_of_records("test", "question_information")
+            accessor.get_number_of_records("存在しないデータベース名", "question_information")
 
     def test_get_number_of_records3(self):
         """get_number_of_records()をテストするメソッド
@@ -68,7 +68,7 @@ class TestDBAccessor(unittest.TestCase):
 
         accessor = self._create_db_accessor()
         with self.assertRaises(SqliteException):
-            accessor.get_number_of_records("janten_master.db", "test")
+            accessor.get_number_of_records("janten_master.db", "存在しないテーブル名")
 
     """select_aggregate_information()のテスト"""
 
@@ -94,7 +94,7 @@ class TestDBAccessor(unittest.TestCase):
 
         accessor = self._create_db_accessor()
         with self.assertRaises(SqliteException):
-            accessor.select_aggregate_information("test", 1)
+            accessor.select_aggregate_information("存在しないデータベース名", 1)
 
     def test_select_aggregate_information3(self):
         """select_aggregate_information()をテストするメソッド
@@ -129,7 +129,7 @@ class TestDBAccessor(unittest.TestCase):
 
         accessor = self._create_db_accessor()
         with self.assertRaises(SqliteException):
-            accessor.select_question_information("test", 1)
+            accessor.select_question_information("存在しないデータベース名", 1)
 
     def test_select_question_information3(self):
         """select_question_information()をテストするメソッド
@@ -164,7 +164,7 @@ class TestDBAccessor(unittest.TestCase):
 
         accessor = self._create_db_accessor()
         with self.assertRaises(SqliteException):
-            accessor.select_tehai_information("test", 1)
+            accessor.select_tehai_information("存在しないデータベース名", 1)
 
     def test_select_tehai_information3(self):
         """select_tehai_information()をテストするメソッド
@@ -188,11 +188,11 @@ class TestDBAccessor(unittest.TestCase):
 
         accessor = self._create_db_accessor()
         accessor.insert_answer_information(
-            "janten_master.db", AnswerInformation(1, "test", Pai.MAN_01)
+            "janten_master.db", AnswerInformation(1, "dummy", Pai.MAN_01)
         )
 
     def test_insert_answer_information2(self):
-        """select_insert_answer_information()をテストするメソッド
+        """insert_answer_information()をテストするメソッド
 
         テスト項目:
             指定されたデータベースが存在しない場合、例外(SqliteException)が発生する。
@@ -201,7 +201,7 @@ class TestDBAccessor(unittest.TestCase):
         accessor = self._create_db_accessor()
         with self.assertRaises(SqliteException):
             accessor.insert_answer_information(
-                "test", AnswerInformation(1, "test", Pai.MAN_01)
+                "存在しないデータベース名", AnswerInformation(1, "dummy", Pai.MAN_01)
             )
 
     def _create_db_accessor(self):

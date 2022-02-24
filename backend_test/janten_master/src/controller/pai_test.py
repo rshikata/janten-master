@@ -13,6 +13,8 @@ else:
 
 
 class TestPai(unittest.TestCase):
+    """get_values()のテスト"""
+
     def test_get_values1(self):
         """get_values()をテストするメソッド
 
@@ -29,7 +31,7 @@ class TestPai(unittest.TestCase):
             指定された引数に該当するデータが存在しない場合、例外(ValueError)が発生する。
         """
         with self.assertRaises(ValueError):
-            Pai.get_values("test")
+            Pai.get_values("dummy")
 
 
 if __name__ == "__main__":
