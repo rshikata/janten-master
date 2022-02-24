@@ -1,3 +1,16 @@
+try:
+    import os
+    import sys
+
+    sys.path.append(os.path.join(os.path.dirname(__file__), "../../../.."))
+except ImportError as e:
+    sys.exit(str(e))
+else:
+    from backend.janten_master.src.controller.pai import (
+        Pai,
+    )
+
+
 class AnswerInformation:
     """プレーヤーの回答情報を保持する
 
@@ -8,7 +21,7 @@ class AnswerInformation:
 
     """
 
-    def __init__(self, question_id, player_name, answer_pai_id):
+    def __init__(self, question_id: int, player_name: str, answer_pai_id: Pai):
         self.__question_id = question_id
         self.__player_name = player_name
         self.__answer_pai_id = answer_pai_id
