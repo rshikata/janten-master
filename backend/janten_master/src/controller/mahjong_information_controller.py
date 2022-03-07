@@ -18,12 +18,20 @@ else:
     from backend.janten_master.src.controller.pai import (
         Pai,
     )
+    from backend.janten_master.src.controller.sqlite_exception import (
+        SqliteException,
+    )
+    from backend.janten_master.src.controller.not_found_exception import (
+        NotFoundException,
+    )
 
 
 class MahjongInformationController:
     """機能に対応したデータ操作を行う"""
 
-    def register_answer_information(self, question_id, player_name, answer_pai):
+    def register_answer_information(
+        self, question_id: int, player_name: str, answer_pai: str
+    ):
         """プレーヤーの回答情報をデータベースに登録する
 
         Args:
@@ -52,16 +60,19 @@ class MahjongInformationController:
 
             accessor = self._create_db_accessor()
             answer = AnswerInformation(
-                int(question_id), player_name, Pai.get_values(answer_pai)
+                question_id, player_name, Pai.get_values(answer_pai)
             )
             accessor.insert_answer_information(DATABASE_NAME, answer)
 
             return {"data": {}, "error": {}}, 200
 
-        except Exception:
+        except SqliteException:
             return self.__create_error_dict("回答情報の登録に失敗しました。"), 404
 
-    def get_aggregate_results(self, question_id):
+        except Exception:
+            return self.__create_error_dict("例外が発生しました。"), 404
+
+    def get_aggregate_results(self, question_id: int):
         """データベースから集計情報を取得する
 
         Args:
@@ -94,7 +105,7 @@ class MahjongInformationController:
 
             accessor = self._create_db_accessor()
             aggregate_results = accessor.select_aggregate_information(
-                DATABASE_NAME, int(question_id)
+                DATABASE_NAME, question_id
             )
 
             results_list = []
@@ -115,8 +126,14 @@ class MahjongInformationController:
 
             return result_dict, 200
 
-        except Exception:
+        except SqliteException:
             return self.__create_error_dict("集計結果の取得に失敗しました。"), 404
+
+        except NotFoundException:
+            return self.__create_error_dict("回答データが存在しません。"), 404
+
+        except Exception:
+            return self.__create_error_dict("例外が発生しました。"), 404
 
     def get_question_information(self):
         """データベースから問題情報を取得する
@@ -127,7 +144,7 @@ class MahjongInformationController:
             正常時:
             {
                 "data": {
-                    "question-id ": int,
+                    "question-id": int,
                     "dora-pai": {"id":str, "path":str},
                     "tsumo-pai": {"id":str, "path":str},
                     "tehai": [
@@ -192,12 +209,18 @@ class MahjongInformationController:
 
             return result_dict, 200
 
-        except Exception:
+        except SqliteException:
             return self.__create_error_dict("問題の取得に失敗しました。"), 404
+
+        except NotFoundException:
+            return self.__create_error_dict("問題データが存在しません。"), 404
+
+        except Exception:
+            return self.__create_error_dict("例外が発生しました。"), 404
 
     # 牌情報のdictを作成する。
     def __create_pai_data_dict(self, pai_list):
-        operator = ResourceController("../pai-images")
+        operator = self._create_resource_controller()
         pai_data_list = []
 
         for pai in pai_list:
@@ -209,7 +232,7 @@ class MahjongInformationController:
 
     # 集計情報のdictを作成する。
     def __create_aggregated_data_dict(self, pai_list):
-        operator = ResourceController("../pai-images")
+        operator = self._create_resource_controller()
         pai_data_list = []
 
         for pai in pai_list:
@@ -230,3 +253,6 @@ class MahjongInformationController:
 
     def _create_db_accessor(self):
         return DBAccessor()
+
+    def _create_resource_controller(self):
+        return ResourceController("static/pai-images")

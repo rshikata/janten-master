@@ -45,14 +45,14 @@ class Pai(Enum):
     NAN = {"id": "NAN", "index": "03-02-00", "order": 32}
     SYA = {"id": "SYA", "index": "03-03-00", "order": 33}
     PEI = {"id": "PEI", "index": "03-04-00", "order": 34}
-    HAKU = {"id": "HAKU ", "index": "03-05-00", "order": 35}
+    HAKU = {"id": "HAKU", "index": "03-05-00", "order": 35}
     HATSU = {"id": "HATSU", "index": "03-06-00", "order": 36}
     TYUN = {"id": "TYUN", "index": "03-07-00", "order": 37}
 
-    def get_values(pai_id):
+    def get_values(pai_id: str):
         """牌IDからvalue値を返す
         Args:
-          pai_id (str): 牌のID
+          pai_id: 牌のID
 
         Returns:
             Pai: enumのvalue値を返す

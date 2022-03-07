@@ -1,3 +1,16 @@
+try:
+    import os
+    import sys
+
+    sys.path.append(os.path.join(os.path.dirname(__file__), "../../../.."))
+except ImportError as e:
+    sys.exit(str(e))
+else:
+    from backend.janten_master.src.controller.pai import (
+        Pai,
+    )
+
+
 class TehaiInformation:
     """問題に対応した手牌情報と作成・更新日時を保持する
 
@@ -23,22 +36,22 @@ class TehaiInformation:
 
     def __init__(
         self,
-        tehai_id,
-        tehai_01,
-        tehai_02,
-        tehai_03,
-        tehai_04,
-        tehai_05,
-        tehai_06,
-        tehai_07,
-        tehai_08,
-        tehai_09,
-        tehai_10,
-        tehai_11,
-        tehai_12,
-        tehai_13,
-        create_datetime,
-        update_datetime,
+        tehai_id: Pai,
+        tehai_01: Pai,
+        tehai_02: Pai,
+        tehai_03: Pai,
+        tehai_04: Pai,
+        tehai_05: Pai,
+        tehai_06: Pai,
+        tehai_07: Pai,
+        tehai_08: Pai,
+        tehai_09: Pai,
+        tehai_10: Pai,
+        tehai_11: Pai,
+        tehai_12: Pai,
+        tehai_13: Pai,
+        create_datetime: str,
+        update_datetime: str,
     ):
         self.__tehai_id = tehai_id
         self.__tehai_01 = tehai_01

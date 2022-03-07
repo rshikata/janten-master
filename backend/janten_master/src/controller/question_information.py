@@ -1,3 +1,16 @@
+try:
+    import os
+    import sys
+
+    sys.path.append(os.path.join(os.path.dirname(__file__), "../../../.."))
+except ImportError as e:
+    sys.exit(str(e))
+else:
+    from backend.janten_master.src.controller.pai import (
+        Pai,
+    )
+
+
 class QuestionInformation:
     """表示する問題情報と作成・更新日時を保持する。
 
@@ -12,7 +25,13 @@ class QuestionInformation:
     """
 
     def __init__(
-        self, question_id, dora_id, tsumo_id, tehai_id, create_datetime, update_datetime
+        self,
+        question_id: int,
+        dora_id: Pai,
+        tsumo_id: Pai,
+        tehai_id: int,
+        create_datetime: str,
+        update_datetime: str,
     ):
         self.__question_id = question_id
         self.__dora_id = dora_id

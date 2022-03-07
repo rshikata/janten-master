@@ -1,10 +1,23 @@
+try:
+    import os
+    import sys
+
+    sys.path.append(os.path.join(os.path.dirname(__file__), "../../../.."))
+except ImportError as e:
+    sys.exit(str(e))
+else:
+    from backend.janten_master.src.controller.pai import (
+        Pai,
+    )
+
+
 class ResourceController:
     """牌IDとパスとの間の変換を行う"""
 
     def __init__(self, root_path):
         self.__root_path = root_path
 
-    def convert_to_path(self, pai_id):
+    def convert_to_path(self, pai_id: Pai):
         """牌情報からパスに変換
 
         Args:
@@ -14,7 +27,7 @@ class ResourceController:
             str: 牌IDに対応した画像ファイルパス
         """
         pai_index = pai_id.value.get("index")
-        kind_list = ["man", "sou", "pin", "ji"]
+        kind_list = ["man", "pin", "sou", "ji"]
         pai_value = pai_index.split("-")
         pai_kind = kind_list[int(pai_value[0])]
         pai_number = int(pai_value[1])
