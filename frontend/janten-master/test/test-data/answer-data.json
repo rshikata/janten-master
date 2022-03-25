@@ -1,0 +1,17 @@
+{
+	"data": {
+		"answer_imformation": [
+			{
+				"id": "dummy1",
+				"path": "dummy1",
+				"number": "1"
+			},
+			{
+				"id": "dummy2",
+				"path": "dummy2",
+				"number": "2"
+			}
+		]
+	},
+	"error": {}
+}

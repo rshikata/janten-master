@@ -19,9 +19,6 @@ export default class HttpCommunicationController {
 			},
 		};
 		if (methodName !== "GET") {
-			if (undefined) {
-				throw new SyntaxError("parameter is undefined");
-			}
 			options.body = JSON.stringify(parameter);
 		}
 
