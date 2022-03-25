@@ -1,0 +1,68 @@
+{
+	"data": {
+		"question-id ": "1",
+		"dora-pai": {
+			"id": "dummy",
+			"path": "dummy-path"
+		},
+		"tsumo-pai": {
+			"id": "dummy",
+			"path": "dummy-path"
+		},
+		"tehai": [
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			},
+			{
+				"id": "dummy",
+				"path": "dummy-path"
+			}
+		]
+	},
+	"error": {}
+}
