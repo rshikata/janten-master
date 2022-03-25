@@ -19,7 +19,9 @@ describe("QuestionViewController", () => {
 		it("正常に取得できた場合", async () => {
 			const controller = createController();
 
-			controller.testController.setReturn([createResultInformation()]);
+			controller.testController.setAggregateDataReturn([
+				createResultInformation(),
+			]);
 			const result = await controller.getRsultViewData(1);
 			assert.instanceOf(result, Array);
 			assert.equal(result[0].paiId, "dummy");
@@ -33,15 +35,16 @@ describe("QuestionViewController", () => {
 		 */
 		it("引数が不正な場合", async () => {
 			const controller = createController();
-			controller.testController.setReturn([createResultInformation()]);
+			controller.testController.setAggregateDataReturn([
+				createResultInformation(),
+			]);
 			try {
 				await controller.getRsultViewData("dummy");
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, SyntaxError);
 				assert.equal(e.message, "引数が不正です。");
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 
 		/**
@@ -49,14 +52,13 @@ describe("QuestionViewController", () => {
 		 */
 		it("集計結果の取得に失敗した場合", async () => {
 			const controller = createController();
-			controller.testController.setError(true);
+			controller.testController.setGetAggregateDataError(true);
 			try {
 				await controller.getRsultViewData("dummy");
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 	});
 
@@ -83,12 +85,11 @@ describe("QuestionViewController", () => {
 			const controller = createController();
 			try {
 				await controller.registerAnswerData(1, ":", "dummy");
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
 				assert.equal(e.message, "回答情報に未入力の項目があります。");
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 
 		/**
@@ -96,14 +97,13 @@ describe("QuestionViewController", () => {
 		 */
 		it("回答情報の登録に失敗した場合", async () => {
 			const controller = createController();
-			controller.testController.setError(true);
+			controller.testController.setRegisterAnswerDataError(true);
 			try {
 				await controller.registerAnswerData(1, "dummy", "dummy");
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 	});
 
@@ -116,7 +116,9 @@ describe("QuestionViewController", () => {
 		 */
 		it("正常に登録できた場合", async () => {
 			const controller = createController();
-			controller.testController.setReturn(createQuestionInformation());
+			controller.testController.setQestionDataReturn(
+				createQuestionInformation()
+			);
 			const result = await controller.getQestionViewData();
 
 			assert.hasAllKeys(result, ["id", "dora", "tsumo", "tehai"]);
@@ -130,14 +132,13 @@ describe("QuestionViewController", () => {
 		 */
 		it("問題情報の取得に失敗した場合", async () => {
 			const controller = createController();
-			controller.testController.setError(true);
+			controller.testController.setGetQestionDataError(true);
 			try {
 				await controller.getQestionViewData();
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 	});
 });

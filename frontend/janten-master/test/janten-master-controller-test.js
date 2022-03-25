@@ -22,7 +22,7 @@ describe("JantenMasterController", () => {
 			const questionTestData = JSON.parse(
 				fs.readFileSync("./test/test-data/question-data.json", "utf8")
 			);
-			controller.testController.setReturn(questionTestData);
+			controller.testController.setRequestDataReturn(questionTestData);
 
 			const result = await controller.getQestionInformation();
 			assert.instanceOf(result, QuestionInformation);
@@ -33,15 +33,14 @@ describe("JantenMasterController", () => {
 		 */
 		it("問題情報取得でエラーが発生した場合", async () => {
 			const controller = createController();
-			controller.testController.setError(true);
+			controller.testController.setRequestError(true);
 
 			try {
 				await controller.getQestionInformation();
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 
 		/**
@@ -52,15 +51,14 @@ describe("JantenMasterController", () => {
 			const errorTestData = JSON.parse(
 				fs.readFileSync("./test/test-data/error-data.json", "utf8")
 			);
-			controller.testController.setReturn(errorTestData);
+			controller.testController.setRequestDataReturn(errorTestData);
 			try {
 				await controller.getQestionInformation();
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
 				assert.equal(e.message, "dummy-error");
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 	});
 
@@ -75,7 +73,7 @@ describe("JantenMasterController", () => {
 		it("正常に登録できた場合", async () => {
 			const controller = createController();
 			try {
-				controller.testController.setReturn({ data: {}, error: {} });
+				controller.testController.setRequestDataReturn({ data: {}, error: {} });
 				await controller.registerAnswerInformation(createAnswerInformation());
 			} catch (e) {
 				assert.fail("Exception thrown");
@@ -89,12 +87,11 @@ describe("JantenMasterController", () => {
 			const controller = createController();
 			try {
 				await controller.registerAnswerInformation("dummy");
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, TypeError);
 				assert.equal(e.message, "引数が不正です。");
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 
 		/**
@@ -102,14 +99,13 @@ describe("JantenMasterController", () => {
 		 */
 		it("登録時にエラーが発生した場合", async () => {
 			const controller = createController();
-			controller.testController.setError(true);
+			controller.testController.setRequestError(true);
 			try {
 				await controller.registerAnswerInformation("dummy");
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 
 		/**
@@ -121,16 +117,14 @@ describe("JantenMasterController", () => {
 			const errorTestData = JSON.parse(
 				fs.readFileSync("./test/test-data/error-data.json", "utf8")
 			);
-			controller.testController.setReturn(errorTestData);
+			controller.testController.setRequestDataReturn(errorTestData);
 			try {
 				await controller.getQestionInformation();
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
 				assert.equal(e.message, "dummy-error");
-
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 	});
 
@@ -146,7 +140,7 @@ describe("JantenMasterController", () => {
 			const answerTestData = JSON.parse(
 				fs.readFileSync("./test/test-data/answer-data.json", "utf8")
 			);
-			controller.testController.setReturn(answerTestData);
+			controller.testController.setRequestDataReturn(answerTestData);
 			const result = await controller.getAggregateResults(1);
 			assert.instanceOf(result[0], ResultInformation);
 			assert.equal(result.length, 2);
@@ -159,12 +153,11 @@ describe("JantenMasterController", () => {
 			const controller = createController();
 			try {
 				await controller.getAggregateResults("dummy");
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, TypeError);
 				assert.equal(e.message, "引数が不正です。");
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 
 		/**
@@ -172,14 +165,13 @@ describe("JantenMasterController", () => {
 		 */
 		it("集計情報の取得時にエラーが発生した場合", async () => {
 			const controller = createController();
-			controller.testController.setError(true);
+			controller.testController.setRequestError(true);
 			try {
 				await controller.getAggregateResults(1);
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 
 		/**
@@ -191,15 +183,14 @@ describe("JantenMasterController", () => {
 			const errorTestData = JSON.parse(
 				fs.readFileSync("./test/test-data/error-data.json", "utf8")
 			);
-			controller.testController.setReturn(errorTestData);
+			controller.testController.setRequestDataReturn(errorTestData);
 			try {
 				await controller.getAggregateResults(1);
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
 				assert.equal(e.message, "dummy-error");
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 	});
 });
