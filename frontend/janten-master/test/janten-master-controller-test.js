@@ -22,6 +22,7 @@ describe("JantenMasterController", () => {
 			const questionTestData = JSON.parse(
 				fs.readFileSync("./test/test-data/question-data.json", "utf8")
 			);
+      
 			controller.testController.setRequestDataReturn(questionTestData);
 
 			const result = await controller.getQestionInformation();
@@ -41,6 +42,7 @@ describe("JantenMasterController", () => {
 			} catch (e) {
 				assert.instanceOf(e, Error);
 			}
+
 		});
 
 		/**
@@ -51,6 +53,7 @@ describe("JantenMasterController", () => {
 			const errorTestData = JSON.parse(
 				fs.readFileSync("./test/test-data/error-data.json", "utf8")
 			);
+
 			controller.testController.setRequestDataReturn(errorTestData);
 			try {
 				await controller.getQestionInformation();
@@ -87,6 +90,7 @@ describe("JantenMasterController", () => {
 			const controller = createController();
 			try {
 				await controller.registerAnswerInformation("dummy");
+
 				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, TypeError);
@@ -99,6 +103,7 @@ describe("JantenMasterController", () => {
 		 */
 		it("登録時にエラーが発生した場合", async () => {
 			const controller = createController();
+
 			controller.testController.setRequestError(true);
 			try {
 				await controller.registerAnswerInformation("dummy");
@@ -124,7 +129,7 @@ describe("JantenMasterController", () => {
 			} catch (e) {
 				assert.instanceOf(e, Error);
 				assert.equal(e.message, "dummy-error");
-			}
+			}		
 		});
 	});
 
@@ -140,6 +145,7 @@ describe("JantenMasterController", () => {
 			const answerTestData = JSON.parse(
 				fs.readFileSync("./test/test-data/answer-data.json", "utf8")
 			);
+
 			controller.testController.setRequestDataReturn(answerTestData);
 			const result = await controller.getAggregateResults(1);
 			assert.instanceOf(result[0], ResultInformation);

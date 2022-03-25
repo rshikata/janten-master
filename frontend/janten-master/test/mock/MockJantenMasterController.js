@@ -20,6 +20,7 @@ export default class MockJantenMasterController {
 
 	async registerAnswerInformation(answer) {
 		if (this.isRegisterAnswerDataError) {
+
 			throw new Error();
 		}
 	}

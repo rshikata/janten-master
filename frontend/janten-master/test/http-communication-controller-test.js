@@ -76,7 +76,6 @@ describe("HttpCommunicationController", () => {
 			} catch (e) {
 				assert.instanceOf(e, Error);
 				assert.equal(e.message, "リクエストエラー");
-				return;
 			}
 		});
 	});

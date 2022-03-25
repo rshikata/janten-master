@@ -22,6 +22,7 @@ describe("QuestionViewController", () => {
 			controller.testController.setAggregateDataReturn([
 				createResultInformation(),
 			]);
+      
 			const result = await controller.getRsultViewData(1);
 			assert.instanceOf(result, Array);
 			assert.equal(result[0].paiId, "dummy");
@@ -35,6 +36,7 @@ describe("QuestionViewController", () => {
 		 */
 		it("引数が不正な場合", async () => {
 			const controller = createController();
+      
 			controller.testController.setAggregateDataReturn([
 				createResultInformation(),
 			]);
@@ -52,6 +54,7 @@ describe("QuestionViewController", () => {
 		 */
 		it("集計結果の取得に失敗した場合", async () => {
 			const controller = createController();
+
 			controller.testController.setGetAggregateDataError(true);
 			try {
 				await controller.getRsultViewData("dummy");
