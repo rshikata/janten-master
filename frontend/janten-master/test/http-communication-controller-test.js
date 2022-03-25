@@ -72,12 +72,11 @@ describe("HttpCommunicationController", () => {
 			fetchMock.get("dummyURL", { status: 404 });
 			try {
 				const result = await controller.requestData("dummyURL");
+				assert.fail("Exception not thrown");
 			} catch (e) {
 				assert.instanceOf(e, Error);
 				assert.equal(e.message, "リクエストエラー");
-				return;
 			}
-			assert.fail("Exception not thrown");
 		});
 	});
 });

@@ -14,11 +14,11 @@ export default class MockHttpCommunicationController {
 		return await this.returnValue;
 	}
 
-	setReturn(value) {
+	setRequestDataReturn(value) {
 		this.returnValue = value;
 	}
 
-	setError(isError) {
+	setRequestError(isError) {
 		this.isErrorOnRequestData = isError;
 	}
 }
